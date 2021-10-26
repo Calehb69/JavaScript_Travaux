@@ -4,7 +4,7 @@ let voiture = {
   marque: "Renault Twingo 3",
   annee: 2014,
   dateAchat: "Fri-Jul-31-2015",
-  passagers: ["Audrey", "Gribouille"],
+  passagers: ["Audrey", "Gribouille", "Dobby", "Gollum"],
 };
 
 document.querySelector(
@@ -16,5 +16,7 @@ document.querySelector(
 <li> Passagers : <ol>
 <li>${voiture.passagers[0]} </li>
 <li>${voiture.passagers[1]} </li>
+<li>${voiture.passagers[2]} </li>
+<li>${voiture.passagers[3]} </li>
 </li></ol>
 </ul></p>`;
