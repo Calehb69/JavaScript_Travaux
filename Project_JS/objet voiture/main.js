@@ -1,22 +1,10 @@
 "use strict";
 
-let voiture = {
-  marque: "Renault Twingo 3",
-  annee: 2014,
-  dateAchat: "Fri-Jul-31-2015",
-  passagers: ["Audrey", "Gribouille", "Dobby", "Gollum"],
-};
+let marque=["Renault Twingo 3"];
+let anneeConstruction=[2014];
+let dateAchat=["Vendredi 31 Juillet 2015"];
+let passagers=["Audrey", "Gribouille", "Simon", "Dobby"]
 
-document.querySelector(
-  "#content"
-  ).innerHTML += `<p> <strong> Information sur la voiture : </strong> <ul>
-<li> Marque : ${voiture.marque}</li>
-<li> Anné de construction : ${voiture.annee}</li>
-<li> Date d'achat : ${voiture.dateAchat}</li>
-<li> Passagers : <ol>
-<li>${voiture.passagers[0]} </li>
-<li>${voiture.passagers[1]} </li>
-<li>${voiture.passagers[2]} </li>
-<li>${voiture.passagers[3]} </li>
-</li></ol>
-</ul></p>`;
+
+document.querySelector("#content").innerHTML = `<h2>Information sur la voiture :
+  <ul><li>${marque}</li> <li>${anneeConstruction}</li> <li>${dateAchat}</li> <li>${passagers}</li></ul></h2>`;
