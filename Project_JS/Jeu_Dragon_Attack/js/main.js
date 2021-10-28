@@ -3,8 +3,9 @@
 /*****************************************
  * DONNEES DU JEU
  *****************************************/
-const game = {};
+const DIV = document.querySelector("#game");
 
+let game;
 /*****************************************
  * DECLARATION DE VARIABLES ET CONSTANTES
  *****************************************/
@@ -30,7 +31,7 @@ function computeDragonDamagePoint() {
     //le dragon est à son minimun de dégâts influencé par le niveau facile.
     damagePoint = getRandomInteger(10, 20);
   } else {
-    damagePoint = getRandomInteger(20, 30);
+    damagePoint = getRandomInteger(30, 40);
   }
   //Calcul des dégâts en fonction de l'armure du chevalier choisie par le joueur.
   return Math.round(damagePoint / game.armorRatio);
@@ -46,7 +47,7 @@ function computeKnightDamagePoint() {
       break;
 
     case LEVEL_NORMAL:
-      damagePoint = getRandomInteger(25, 30);
+      damagePoint = getRandomInteger(15, 20);
       break;
 
     case LEVEL_HARD:
@@ -59,8 +60,8 @@ function computeKnightDamagePoint() {
 
 function gameloop() {
   let damagePoint;
-  let vitesseDragon;
-  let vitesseKnight;
+  let dragonSpeed;
+  let knightSpeed;
 
   // Le jeu tourne tant que le dragon et le joueur sont vivants (logique).
   while (game.hpDragon > 0 && game.hpKnight > 0) {
@@ -82,8 +83,7 @@ function gameloop() {
       DIV.innerHTML += `<p>Le dragon vous prend de vitesse et vous brûle, il vous enlève ${damagePoint} PV</p>`;
 
       // Cas inverse où le chevalier est le plus rapide des deux.
-    } else knightSpeed > dragonSpeed;
-    {
+    } else  {
       damagePoint = computeKnightDamagePoint();
 
       // Décrémentation des points de vie du dragon.
@@ -101,11 +101,8 @@ function gameloop() {
 }
 
 function initializeGame() {
-  1;
-
-  // pour initialiser le  jeu
-  /* On part du level 1 dans les tour de jeu*/
-  //game.round = 1;
+  game = new Object();
+  game.round = 1;
 
   game.difficulty = requestInteger(
     "Niveau de difficulté ?\n" + "1. Facile - 2. Normal - 3. Difficile",
@@ -184,7 +181,6 @@ function initializeGame() {
       game.swordRatio = 2;
       break;
   }
-  console.log(game);
 }
 
 function showGameState() {
@@ -243,3 +239,5 @@ function startGame() {
    ***************************************************/
   showGameWinner();
 }
+/******************************************/
+startGame();
