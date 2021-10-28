@@ -16,7 +16,6 @@ const ARMOR_COPPER = 1;
 const ARMOR_IRON = 2;
 const ARMOR_MAGIC = 3;
 
-
 const SWORD_WOOD = 1;
 const SWORD_STEEL = 2;
 const SWORD_EXCALIBUR = 3;
@@ -24,6 +23,83 @@ const SWORD_EXCALIBUR = 3;
 /************
  * FONCTIONS
  ************/
+function computeDragonDamagePoint() {
+  let damagePoint;
+
+  if (game.difficulty == LEVEL_EASY) {
+    //le dragon est à son minimun de dégâts influencé par le niveau facile.
+    damagePoint = getRandomInteger(10, 20);
+  } else {
+    damagePoint = getRandomInteger(20, 30);
+  }
+  //Calcul des dégâts en fonction de l'armure du chevalier choisie par le joueur.
+  return Math.round(damagePoint / game.armorRatio);
+}
+
+function computeKnightDamagePoint() {
+  let damagePoint;
+
+  // Les dégâts infligés par le chevalier sont influencés par la difficulté du jeu.
+  switch (game.difficulty) {
+    case LEVEL_EASY:
+      damagePoint = getRandomInteger(25, 30);
+      break;
+
+    case LEVEL_NORMAL:
+      damagePoint = getRandomInteger(25, 30);
+      break;
+
+    case LEVEL_HARD:
+      damagePoint = getRandomInteger(5, 10);
+      break;
+  }
+  // Calcul des dégâts en fonction de l'épée du chevalier.
+  return Math.round(damagePoint * game.swordRatio);
+}
+
+function gameloop() {
+  let damagePoint;
+  let vitesseDragon;
+  let vitesseKnight;
+
+  // Le jeu tourne tant que le dragon et le joueur sont vivants (logique).
+  while (game.hpDragon > 0 && game.hpKnight > 0) {
+    DIV.innerHTML += `<h3>----- Tour n°${game.round} -----</h3>`;
+
+    // Déterminer la vitesse du dragon et du joueur pour savoir qui frappe le premier.
+    dragonSpeed = getRandomInteger(10, 20);
+    knightSpeed = getRandomInteger(10, 20);
+
+    // Cas où le dragon est le plus rapide des deux.
+    if (dragonSpeed > knightSpeed) {
+      // Le dragon est plus rapide DONC le joueur se prend des dégâts et perd des points de vie.
+      damagePoint = computeDragonDamagePoint();
+
+      // Du coup décrémentation des points de vie du joueur.
+      game.hpKnight -= damagePoint;
+      // la même chose que pour game.hpKnight = game.hpKnight - damagePoint;
+
+      DIV.innerHTML += `<p>Le dragon vous prend de vitesse et vous brûle, il vous enlève ${damagePoint} PV</p>`;
+
+      // Cas inverse où le chevalier est le plus rapide des deux.
+    } else knightSpeed > dragonSpeed;
+    {
+      damagePoint = computeKnightDamagePoint();
+
+      // Décrémentation des points de vie du dragon.
+      game.hpDragon -= damagePoint;
+      // Une fois encore la même que game.hpDragon = game.hpDragon - damagePoint;
+
+      DIV.innerHTML += `<p>Votre vitesse vous fait prendre l'avantage et vous frappez le dragon, vous lui enlevez ${damagePoint} PV</p>`;
+    }
+
+    showGameState();
+
+    // On passe au tour suivant.
+    game.round++;
+  }
+}
+
 function initializeGame() {
   1;
 
@@ -57,8 +133,6 @@ function initializeGame() {
       game.hpKnight = getRandomInteger(150, 200);
       break;
   }
-
-  
 
   /**************************************************************
    * Détermine le choix de l'armure via la fonction requestInteger
@@ -113,66 +187,59 @@ function initializeGame() {
   console.log(game);
 }
 
-function computeDragonDamagePoint() {
-  let damagePoint;
-
-  if (game.difficulty == LEVEL_EASY) {
-    //le dragon est à son minimun de dégâts influencé par le niveau facile.
-    damagePoint = getRandomInteger(10, 20);
-  } else {
-    damagePoint = getRandomInteger(20, 30);
-  }
-  //Calcul des dégâts en fonction de l'armure du chevalier choisie par le joueur.
-  return Math.round(damagePoint / game.armorRatio);
+function showGameState() {
+  DIV.innerHTML += `
+    <table>
+      <thead>
+        <tr>
+          <th>Personnage</th>
+          <th>PV</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+            <td>Chevalier</td>
+            <td>${game.hpKnight}</td>
+        </tr>
+        <tr>
+          <td>Dragon</td>
+          <td>${game.hpDragon}</td>
+        </tr>
+      </tbody>
+    </table>`;
 }
 
-function computeKnightDamagePoint() {
-  let damagePoint;
-
-  // Les dégâts infligés par le chevalier sont influencés par la difficulté du jeu.
-  switch (game.difficulty) {
-    case LEVEL_EASY:
-      damagePoint = getRandomInteger(25, 30);
-      break;
-
-    case LEVEL_NORMAL:
-      damagePoint = getRandomInteger(25, 30);
-      break;
-
-    case LEVEL_HARD:
-      damagePoint = getRandomInteger(5, 10);
-      break;
+function showGameWinner() {
+  DIV.innerHTML = "<article></article>" + DIV.innerHTML;
+  const ARTICLE = document.querySelector("#game article");
+  if (game.hpDragon <= 0) {
+    ARTICLE.innerHTML += `<img src='img/knight.png'>
+      <h4>Vous avez gagné, vous avez terrassé le terrible dragon !</h4>
+      <p>Il vous restait ${game.hpKnight} PV.</p>
+    `;
   }
-  // Calcul des dégâts en fonction de l'épée du chevalier.
-  return Math.round(damagePoint * game.swordRatio);
+  // cas où le chevalier se fait becqueter > if(game.hpKnight <= 0)
+  else {
+    ARTICLE.innerHTML += `<img src='img/dragon.png'>
+      <h4>Le dragon a gagné, il vous a grillé sur place !</h4>
+      <p>Il restait ${game.hpDragon} PV au dragon.</p>
+    `;
+  }
 }
 
-function gameloop() {
-  let damagePoint;
-  let vitesseDragon;
-  let vitesseKnight;
-
-  // Le jeu tourne tant que le dragon et le joueur sont vivants (logique).
-  while (game.hpDragon > 0 && game.hpKnight > 0) {
-    DIV.innerHTML += `<h3>----- Tour n°${game.round} -----</h3>`;
-
-  // Déterminer la vitesse du dragon et du joueur pour savoir qui frappe le premier.
-  dragonSpeed = getRandomInteger(10, 20);
-  knightSpeed = getRandomInteger(10, 20);
-
-  // Cas où le dragon est le plus rapide des deux.
-    if (dragonSpeed > knightSpeed) {
-      // Le dragon est plus rapide DONC le joueur se prend des dégâts et perd des points de vie.
-      damagePoint = computeDragonDamagePoint();
-    }
-  // Cas inverse où le chevalier est le plus rapide des deux. 
-  else (knightSpeed > dragonSpeed) {
-    damagePoint = computeKnightDamagePoint();
-  }
-
-  }
-
-/*********************************************/
-initializeGame();
-/*********************************************/
-
+function startGame() {
+  /*************************************************
+   * Lancement du jeu.
+   **************************************************/
+  initializeGame();
+  /**************************************************
+   * Gestion du tour par tour avec recap des scores.
+   ***************************************************/
+  DIV.innerHTML = "<h3>Points de vie de départ</h3>";
+  showGameState(); //recap
+  gameLoop(); //fonctionnement du jeu
+  /**************************************************
+   * Fin du jeu avec affichage du gagnant.
+   ***************************************************/
+  showGameWinner();
+}
