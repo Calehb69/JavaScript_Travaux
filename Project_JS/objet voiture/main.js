@@ -9,7 +9,7 @@ let voiture = {
 
 document.querySelector(
   "#content"
-  ).innerHTML += `<p> <strong> Information sur la voiture : </strong> <ul>
+).innerHTML += `<p> <strong> Information sur la voiture : </strong> <ul>
 <li> Marque : ${voiture.marque}</li>
 <li> Anné de construction : ${voiture.annee}</li>
 <li> Date d'achat : ${voiture.dateAchat}</li>
