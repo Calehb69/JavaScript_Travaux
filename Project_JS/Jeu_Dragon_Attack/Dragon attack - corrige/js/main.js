@@ -228,6 +228,7 @@ function startGame() {
   // Exécution du jeu.
   DIV.innerHTML = "<h3>Points de vie de départ</h3>";
   showGameState();
+  
   gameLoop();
 
   // Fin du jeu.

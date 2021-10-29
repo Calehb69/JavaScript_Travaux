@@ -58,7 +58,7 @@ function computeKnightDamagePoint() {
   return Math.round(damagePoint * game.swordRatio);
 }
 
-function gameloop() {
+function gameLoop() {
   let damagePoint;
   let dragonSpeed;
   let knightSpeed;
@@ -232,8 +232,9 @@ function startGame() {
    * Gestion du tour par tour avec recap des scores.
    ***************************************************/
   DIV.innerHTML = "<h3>Points de vie de départ</h3>";
-  showGameState(); //recap
-  gameLoop(); //fonctionnement du jeu
+  showGameState(); //affichage déroulé du jeu
+
+  gameLoop(); //paterne du jeu --> déroulé.
   /**************************************************
    * Fin du jeu avec affichage du gagnant.
    ***************************************************/
