@@ -20,9 +20,8 @@ function requestInteger(message, min, max){
  */
 do {
   //user entre un nb entier.
-  integer = parseInt(window.prompt(message));
-} 
-while (isNaN(integer) == true || integer < min || integer > max);
+  integer = parseInt(window.prompt(message, 1));
+} while (isNaN(integer) == true || integer < min || integer > max);
 
 return integer;
 }
