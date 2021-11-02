@@ -5,7 +5,7 @@
  *  CONSTANTES
 ******************/
 const button = document.querySelector("#toggle-rectangle");
-const rectangle = document.querySelector(".rectangle");
+const RECTANGLE = document.querySelector(".rectangle");
 
 /***************
  * FONCTIONS
@@ -18,18 +18,18 @@ function toggleRectangle() {
 
 function onMouseOverRectangle() {
   // La méthode .remove() va ajouter la classe.
-  rectangle.classList.add("important");
+  RECTANGLE.classList.add("important");
 }
 
 function onDoubleClickRectangle(){
-  rectangle.classList.toggle("good");
-  rectangle.addEventListener("dbclick", onDoubleClickRectangle);
+  RECTANGLE.classList.toggle("good");
+  RECTANGLE.addEventListener("dbclick", onDoubleClickRectangle);
 }
 
 function onMouseOutRectangle() {
   // La méthode .remove() va supprimer la classes.
-    rectangle.classList.remove("important");
-  rectangle.classList.remove("good");
+  RECTANGLE.classList.remove("important");
+  RECTANGLE.classList.remove("good");
 }
 
 /******************
@@ -41,8 +41,8 @@ function onMouseOutRectangle() {
 document.querySelector("#toggle-rectangle").addEventListener("click", toggleRectangle);
 
 // Installation de deux gestionnaires d'évènements de survol du rectangle à la souris.
-rectangle.addEventListener("mouseover", onMouseOverRectangle);
-rectangle.addEventListener("mouseout", onMouseOutRectangle);
+RECTANGLE.addEventListener("mouseover", onMouseOverRectangle);
+RECTANGLE.addEventListener("mouseout", onMouseOutRectangle);
 
 // Installation d'un gestionnaire d'évènement double clic sur le rectangle.
-rectangle.addEventListener("dblclick", onDoubleClickRectangle);
+RECTANGLE.addEventListener("dblclick", onDoubleClickRectangle);
