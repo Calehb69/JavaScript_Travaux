@@ -31,10 +31,10 @@ do{
     do
     remise = parseInt("Quel est le montant de votre remise ?")
     
-    = montantHT * (remise / 100);}
+    = montantHT * (remise / 100)}
     else {
-      document.querySelector("#content).innerHTML += `<p>Aucune remise n'a été appliquée.</p>`;
-    }
+      document.querySelector("#content").innerHTML += `<p>Aucune remise n'a été appliquée.</p>`;
+    };
 
 //Calcul montant TVA
 montantTVA = nouveauPrix * (TAUX_TVA / 100);
