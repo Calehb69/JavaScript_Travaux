@@ -36,9 +36,6 @@ montantTVA = (montantHT * TAUX_DE_TVA) / 100;
 montantTTC = montantHT + montantTVA;
 
 // Affichage du résultat directement dans la page HTML.
-const DIV = document.querySelector("#content");
-DIV.innerHTML = `<p>Pour un montant HT de ${montantHT}€ il y a ${montantTVA}€ de TVA.</p>
-  <p>Le montant TTC est donc de ${montantTTC}€.</p>`;
 
 if (demandeRemise == "oui" || demandeRemise == "yes") {
   DIV.innerHTML += `<p>Une remise de ${pourcentageRemise} % a été appliquée sur le montant HT.</p>`;
