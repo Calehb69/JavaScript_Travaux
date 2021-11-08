@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="utf-8">
+  <title>JavaScript</title>
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
+    integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/style.css">
+
+
+</head>
+
+<body>
+  <section>
+    <h1><i class="fas fa-tasks"></i> Liste de courses</h1>
+
+    <!-- Contenu du carnet d'adresses (liste de contacts) -->
+    <section id="courses"></section>
+
+
+    <!-- Le formulaire de saisie de tâche ne s'affiche pas au démarrage -->
+    <form id="task-form" class="standard-form" data-mode="add">
+      <hr>
+      <ul>
+        <li>
+          <label for="name">Nom du produit :</label>
+          <input id="name" type="text" name="name">
+        </li>
+        <li>
+          <label for="quantity">Quantité :</label>
+          <input id="quantity" type="number" name="name" value="1">
+        </li>
+
+        <li>
+          <input type="submit" id="save" value="Ajouter à la liste">
+        </li>
+        <li>
+          <input type="submit" id="delete" value="Supprimer">
+        </li>
+      </ul>
+    </form>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
