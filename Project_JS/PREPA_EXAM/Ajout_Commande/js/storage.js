@@ -34,3 +34,23 @@ export function load(item) {
 
   return list;
 }
+
+
+let listeRepas = [
+  "lasagne bolognaise",
+  "crosiflette",
+  "curry d'agneau",
+  "pot au feu",
+  "tagliatelle carbonara",
+  "steack frites",
+  "raclette",
+  "queunelles sauce roquefort",
+  "blanquette de veau",
+  "hachi parmentier",
+];
+
+"use strict";
+/****************/
+/****************
+ * THOMAS VIAL - DWWM_PE2_VILL
+ ****************/
